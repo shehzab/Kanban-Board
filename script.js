@@ -1,5 +1,5 @@
 
-        // Data structure for tasks
+        
         class Task {
             constructor(id, text, priority = 'medium', created = new Date()) {
                 this.id = id;
