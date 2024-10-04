@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">Kanban Board</h1>
+        <div class="controls">
+            <button class="control-btn" onclick="clearBoard()">Clear Board</button>
+            <button class="control-btn" onclick="addSampleTasks()">Add Sample Tasks</button>
+        </div>
+    </div>
+    
+    <div class="kanban-board" id="kanbanBoard">
+        <div class="column" data-column="todo">
+            <div class="column-header">
+                <h2 class="column-title">To Do <span class="task-count">0</span></h2>
+            </div>
+            <div class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <button class="add-task" onclick="showAddTask('todo')">+ Add Task</button>
+        </div>
+        <div class="column" data-column="inProgress">
+            <div class="column-header">
+                <h2 class="column-title">In Progress <span class="task-count">0</span></h2>
+            </div>
+            <div class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <button class="add-task" onclick="showAddTask('inProgress')">+ Add Task</button>
+        </div>
+        <div class="column" data-column="done">
+            <div class="column-header">
+                <h2 class="column-title">Done <span class="task-count">0</span></h2>
+            </div>
+            <div class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <button class="add-task" onclick="showAddTask('done')">+ Add Task</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

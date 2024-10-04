@@ -1,0 +1,241 @@
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-color: #ecf0f1;
+            --column-bg: #fff;
+            --task-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 2.5em;
+            margin: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .controls {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            cursor: pointer;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .kanban-board {
+            display: flex;
+            gap: 20px;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 1400px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--column-bg);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .column-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg-color);
+        }
+
+        .column-title {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .task-count {
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 15px;
+            padding: 2px 10px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .task-list {
+            min-height: 100px;
+            flex-grow: 1;
+        }
+
+        .task {
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: var(--task-shadow);
+            cursor: move;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .task::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--secondary-color);
+        }
+
+        .task.dragging {
+            opacity: 0.5;
+            transform: scale(1.02);
+        }
+
+        .task:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--task-shadow), 0 6px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .task:hover .task-actions {
+            opacity: 1;
+        }
+
+        .task-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            transition: color var(--transition-speed);
+        }
+
+        .edit-task {
+            color: var(--secondary-color);
+        }
+
+        .delete-task {
+            color: var(--accent-color);
+        }
+
+        .add-task {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed var(--secondary-color);
+            background-color: transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+            transition: all var(--transition-speed);
+        }
+
+        .add-task:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .task-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 5px;
+            font-size: 0.9em;
+            outline: none;
+            transition: box-shadow var(--transition-speed);
+        }
+
+        .task-input:focus {
+            box-shadow: 0 0 5px var(--secondary-color);
+        }
+
+        .priority-indicator {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .priority-low { background-color: #2ecc71; }
+        .priority-medium { background-color: #f1c40f; }
+        .priority-high { background-color: #e74c3c; }
+
+        @keyframes taskAdded {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .task-added {
+            animation: taskAdded 0.3s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .kanban-board {
+                flex-direction: column;
+                align-items: center;
+            }
+            .column {
+                width: 100%;
+            }
+        }
